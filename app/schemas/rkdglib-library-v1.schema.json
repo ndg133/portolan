@@ -1,0 +1,753 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "formatVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "library": {
+      "type": "object",
+      "properties": {
+        "connectorTypes": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid",
+                "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "family": {
+                "type": "string",
+                "enum": [
+                  "copper",
+                  "optical",
+                  "video",
+                  "usb",
+                  "serial",
+                  "audio",
+                  "power",
+                  "other"
+                ]
+              },
+              "shape": {
+                "default": "generic",
+                "type": "string",
+                "minLength": 1
+              },
+              "complementId": {
+                "default": null,
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "uuid",
+                    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "family"
+            ]
+          }
+        },
+        "linkTypes": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid",
+                "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "color": {
+                "type": "string",
+                "pattern": "^#[0-9a-fA-F]{6}$"
+              },
+              "lineStyle": {
+                "default": "solid",
+                "type": "string",
+                "enum": [
+                  "solid",
+                  "dashed",
+                  "dotted"
+                ]
+              },
+              "lineWidth": {
+                "default": 0.5,
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "allowedConnectorIds": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                }
+              },
+              "refPrefix": {
+                "default": "",
+                "type": "string"
+              },
+              "showInLegend": {
+                "default": true,
+                "type": "boolean"
+              },
+              "markers": {
+                "default": false,
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "color"
+            ]
+          }
+        },
+        "rackModels": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid",
+                "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "heightU": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 52
+              },
+              "widthMm": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "mountingWidth": {
+                "default": "19in",
+                "type": "string",
+                "enum": [
+                  "19in",
+                  "10in"
+                ]
+              },
+              "depthMm": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "usableDepthMm": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "castors": {
+                "default": false,
+                "type": "boolean"
+              },
+              "kind": {
+                "default": "closed",
+                "type": "string",
+                "enum": [
+                  "closed",
+                  "open2",
+                  "open4",
+                  "wall"
+                ]
+              },
+              "frontDoor": {
+                "default": "none",
+                "type": "string",
+                "enum": [
+                  "none",
+                  "glass",
+                  "perforated",
+                  "solid"
+                ]
+              },
+              "rearDoor": {
+                "default": "none",
+                "type": "string",
+                "enum": [
+                  "none",
+                  "glass",
+                  "perforated",
+                  "solid"
+                ]
+              },
+              "uNumbering": {
+                "default": "bottomUp",
+                "type": "string",
+                "enum": [
+                  "bottomUp",
+                  "topDown"
+                ]
+              },
+              "zeroUSlots": {
+                "default": {
+                  "frontLeft": 0,
+                  "frontRight": 0,
+                  "rearLeft": 0,
+                  "rearRight": 0
+                },
+                "type": "object",
+                "properties": {
+                  "frontLeft": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "frontRight": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "rearLeft": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "rearRight": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "frontLeft",
+                  "frontRight",
+                  "rearLeft",
+                  "rearRight"
+                ]
+              },
+              "color": {
+                "default": "#8a8f98",
+                "type": "string",
+                "pattern": "^#[0-9a-fA-F]{6}$"
+              },
+              "trayByLinkType": {
+                "default": {},
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "format": "uuid",
+                  "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "enum": [
+                    "left",
+                    "right"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "heightU",
+              "widthMm",
+              "depthMm",
+              "usableDepthMm"
+            ]
+          }
+        },
+        "equipmentModels": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid",
+                "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "category": {
+                "type": "string",
+                "enum": [
+                  "machine",
+                  "standard",
+                  "external"
+                ]
+              },
+              "subcategory": {
+                "default": "other",
+                "type": "string",
+                "enum": [
+                  "server",
+                  "switch",
+                  "router",
+                  "firewall",
+                  "storage",
+                  "kvm",
+                  "ups",
+                  "laptop",
+                  "pdu",
+                  "blankingPanel",
+                  "cableManager",
+                  "patchPanel",
+                  "shelf",
+                  "drawer",
+                  "fiberPanel",
+                  "monitor",
+                  "controlPanel",
+                  "workstation",
+                  "keyboardMouse",
+                  "generic",
+                  "other"
+                ]
+              },
+              "manufacturer": {
+                "default": "",
+                "type": "string"
+              },
+              "reference": {
+                "default": "",
+                "type": "string"
+              },
+              "heightU": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 52
+              },
+              "width": {
+                "default": "full",
+                "type": "string",
+                "enum": [
+                  "full",
+                  "half"
+                ]
+              },
+              "displaySizeMm": {
+                "default": null,
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "width": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                      },
+                      "height": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                      }
+                    },
+                    "required": [
+                      "width",
+                      "height"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "depthMm": {
+                "default": null,
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "clearanceMm": {
+                "default": 0,
+                "type": "number",
+                "minimum": 0
+              },
+              "defaultMountFace": {
+                "default": "front",
+                "type": "string",
+                "enum": [
+                  "front",
+                  "rear"
+                ]
+              },
+              "front": {
+                "default": {
+                  "renderMode": "schematic",
+                  "imageId": null,
+                  "color": "#3a3f47",
+                  "label": "",
+                  "ports": []
+                },
+                "type": "object",
+                "properties": {
+                  "renderMode": {
+                    "default": "schematic",
+                    "type": "string",
+                    "enum": [
+                      "image",
+                      "schematic"
+                    ]
+                  },
+                  "imageId": {
+                    "default": null,
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{64}\\.(png|jpg|jpeg|svg|webp)$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "default": "#3a3f47",
+                    "type": "string",
+                    "pattern": "^#[0-9a-fA-F]{6}$"
+                  },
+                  "label": {
+                    "default": "",
+                    "type": "string"
+                  },
+                  "ports": {
+                    "default": [],
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                        },
+                        "name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "order": {
+                          "default": 0,
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 9007199254740991
+                        },
+                        "connectorTypeId": {
+                          "type": "string",
+                          "format": "uuid",
+                          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                        },
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "w": {
+                          "type": "number",
+                          "exclusiveMinimum": 0,
+                          "maximum": 1
+                        },
+                        "h": {
+                          "type": "number",
+                          "exclusiveMinimum": 0,
+                          "maximum": 1
+                        },
+                        "group": {
+                          "default": "",
+                          "type": "string"
+                        },
+                        "exit": {
+                          "default": "auto",
+                          "type": "string",
+                          "enum": [
+                            "up",
+                            "down",
+                            "left",
+                            "right",
+                            "auto"
+                          ]
+                        },
+                        "multiple": {
+                          "default": false,
+                          "type": "boolean"
+                        },
+                        "pairedPortId": {
+                          "default": null,
+                          "anyOf": [
+                            {
+                              "type": "string",
+                              "format": "uuid",
+                              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name",
+                        "connectorTypeId",
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ]
+                    }
+                  }
+                }
+              },
+              "rear": {
+                "default": {
+                  "renderMode": "schematic",
+                  "imageId": null,
+                  "color": "#3a3f47",
+                  "label": "",
+                  "ports": []
+                },
+                "type": "object",
+                "properties": {
+                  "renderMode": {
+                    "default": "schematic",
+                    "type": "string",
+                    "enum": [
+                      "image",
+                      "schematic"
+                    ]
+                  },
+                  "imageId": {
+                    "default": null,
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{64}\\.(png|jpg|jpeg|svg|webp)$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "default": "#3a3f47",
+                    "type": "string",
+                    "pattern": "^#[0-9a-fA-F]{6}$"
+                  },
+                  "label": {
+                    "default": "",
+                    "type": "string"
+                  },
+                  "ports": {
+                    "default": [],
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                        },
+                        "name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "order": {
+                          "default": 0,
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 9007199254740991
+                        },
+                        "connectorTypeId": {
+                          "type": "string",
+                          "format": "uuid",
+                          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                        },
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "w": {
+                          "type": "number",
+                          "exclusiveMinimum": 0,
+                          "maximum": 1
+                        },
+                        "h": {
+                          "type": "number",
+                          "exclusiveMinimum": 0,
+                          "maximum": 1
+                        },
+                        "group": {
+                          "default": "",
+                          "type": "string"
+                        },
+                        "exit": {
+                          "default": "auto",
+                          "type": "string",
+                          "enum": [
+                            "up",
+                            "down",
+                            "left",
+                            "right",
+                            "auto"
+                          ]
+                        },
+                        "multiple": {
+                          "default": false,
+                          "type": "boolean"
+                        },
+                        "pairedPortId": {
+                          "default": null,
+                          "anyOf": [
+                            {
+                              "type": "string",
+                              "format": "uuid",
+                              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name",
+                        "connectorTypeId",
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ]
+                    }
+                  }
+                }
+              },
+              "standard": {
+                "default": null,
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "params": {
+                        "type": "object",
+                        "propertyNames": {
+                          "type": "string"
+                        },
+                        "additionalProperties": {}
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "origin": {
+                "default": null,
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "libraryId": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                      },
+                      "libraryName": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "libraryVersion": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 9007199254740991
+                      },
+                      "modelId": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                      }
+                    },
+                    "required": [
+                      "libraryId",
+                      "libraryName",
+                      "libraryVersion",
+                      "modelId"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "category",
+              "heightU"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "formatVersion",
+    "library"
+  ],
+  "$id": "rkdglib-library-v1.schema.json",
+  "title": "Portolan .rkdglib project.json (format 1)"
+}
