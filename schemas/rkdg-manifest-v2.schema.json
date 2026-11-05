@@ -75,6 +75,6 @@
     "createdAt",
     "modifiedAt"
   ],
-  "$id": "rkdg-manifest-v1.schema.json",
-  "title": "Portolan manifest.json (format 1)"
+  "$id": "rkdg-manifest-v2.schema.json",
+  "title": "Portolan manifest.json (format 2)"
 }

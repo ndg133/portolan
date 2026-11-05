@@ -1,55 +1,19 @@
 <!doctype html>
 <html lang="fr">
   <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src &#39;self&#39;; script-src &#39;self&#39; &#39;wasm-unsafe-eval&#39;; style-src &#39;self&#39; &#39;unsafe-inline&#39;; img-src &#39;self&#39; data: blob:; font-src &#39;self&#39; data:; connect-src &#39;self&#39;; worker-src &#39;self&#39; blob:; object-src &#39;none&#39;; base-uri &#39;self&#39;">
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
-    <meta name="referrer" content="no-referrer" />
+    <meta name="theme-color" content="#1f5f8b" />
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
     <title>Portolan</title>
-    <link rel="icon" href="app/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="style.css" />
+    <script type="module" crossorigin src="./assets/index-BZLxp8Fc.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-B8qoO5O8.css">
+  <link rel="manifest" href="./manifest.webmanifest">  <meta name="portolan-site" content="portolan-0.1.0.zip" />
   </head>
   <body>
-    <main>
-      <header>
-        <img src="app/icon.svg" alt="" />
-        <div>
-          <h1>Portolan</h1>
-          <p class="subtitle">Schémas de baies informatiques — version 0.1.0</p>
-        </div>
-      </header>
-      <p>
-        Portolan dessine les armoires, leurs équipements et leur câblage, et produit les schémas
-        PDF, les listes pour tableur et les étiquettes de câbles. Il fonctionne entièrement dans le
-        navigateur : aucune donnée ne quitte votre poste, et l’application reste utilisable hors
-        ligne après une première ouverture.
-      </p>
-      <div class="cards">
-        <a class="card primary" href="app/">
-          <strong>Ouvrir Portolan</strong>
-          <span>L’application, dans le navigateur</span>
-        </a>
-        <a class="card" href="manual/portolan.pdf">
-          <strong>Documentation</strong>
-          <span>Le manuel d’utilisation (PDF)</span>
-        </a>
-        <a class="card" href="notes.html">
-          <strong>Notes de version</strong>
-          <span>Les nouveautés de chaque version</span>
-        </a>
-        <a class="card" href="bibliotheques/">
-          <strong>Bibliothèques</strong>
-          <span>Bibliothèques de l’équipe (mot de passe)</span>
-        </a>
-        <a class="card" href="portolan-0.1.0.zip">
-          <strong>Archive</strong>
-          <span>Application et documentation, pour un réseau isolé</span>
-        </a>
-      </div>
-      <footer>
-        Portolan 0.1.0 — publié le 5 novembre 2026. Pour un déploiement interne, décompressez
-        l’archive sur n’importe quel serveur web : tout y est, sans connexion extérieure.
-      </footer>
-    </main>
+    <div id="root"></div>
   </body>
 </html>

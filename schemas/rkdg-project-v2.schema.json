@@ -4,7 +4,7 @@
   "properties": {
     "formatVersion": {
       "type": "number",
-      "const": 1
+      "const": 2
     },
     "id": {
       "type": "string",
@@ -358,7 +358,7 @@
             ]
           }
         },
-        "equipmentModels": {
+        "machines": {
           "default": [],
           "type": "array",
           "items": {
@@ -373,40 +373,49 @@
                 "type": "string",
                 "minLength": 1
               },
-              "category": {
-                "type": "string",
-                "enum": [
-                  "machine",
-                  "standard",
-                  "external"
+              "equipment": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "switch",
+                      "router",
+                      "firewall",
+                      "patchPanel",
+                      "fiberPanel",
+                      "server",
+                      "storage",
+                      "kvm",
+                      "pdu",
+                      "ups",
+                      "blankingPanel",
+                      "cableManager",
+                      "shelf",
+                      "monitor",
+                      "workstation",
+                      "laptop",
+                      "keyboardMouse",
+                      "controlPanel",
+                      "generic"
+                    ]
+                  },
+                  "params": {
+                    "default": {},
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string"
+                    },
+                    "additionalProperties": {}
+                  }
+                },
+                "required": [
+                  "kind"
                 ]
               },
-              "subcategory": {
-                "default": "other",
-                "type": "string",
-                "enum": [
-                  "server",
-                  "switch",
-                  "router",
-                  "firewall",
-                  "storage",
-                  "kvm",
-                  "ups",
-                  "laptop",
-                  "pdu",
-                  "blankingPanel",
-                  "cableManager",
-                  "patchPanel",
-                  "shelf",
-                  "drawer",
-                  "fiberPanel",
-                  "monitor",
-                  "controlPanel",
-                  "workstation",
-                  "keyboardMouse",
-                  "generic",
-                  "other"
-                ]
+              "generic": {
+                "default": false,
+                "type": "boolean"
               },
               "manufacturer": {
                 "default": "",
@@ -481,7 +490,7 @@
               },
               "front": {
                 "default": {
-                  "renderMode": "schematic",
+                  "renderMode": "default",
                   "imageId": null,
                   "color": "#3a3f47",
                   "label": "",
@@ -490,11 +499,11 @@
                 "type": "object",
                 "properties": {
                   "renderMode": {
-                    "default": "schematic",
+                    "default": "default",
                     "type": "string",
                     "enum": [
-                      "image",
-                      "schematic"
+                      "default",
+                      "image"
                     ]
                   },
                   "imageId": {
@@ -595,6 +604,10 @@
                               "type": "null"
                             }
                           ]
+                        },
+                        "placed": {
+                          "default": false,
+                          "type": "boolean"
                         }
                       },
                       "required": [
@@ -612,7 +625,7 @@
               },
               "rear": {
                 "default": {
-                  "renderMode": "schematic",
+                  "renderMode": "default",
                   "imageId": null,
                   "color": "#3a3f47",
                   "label": "",
@@ -621,11 +634,11 @@
                 "type": "object",
                 "properties": {
                   "renderMode": {
-                    "default": "schematic",
+                    "default": "default",
                     "type": "string",
                     "enum": [
-                      "image",
-                      "schematic"
+                      "default",
+                      "image"
                     ]
                   },
                   "imageId": {
@@ -726,6 +739,10 @@
                               "type": "null"
                             }
                           ]
+                        },
+                        "placed": {
+                          "default": false,
+                          "type": "boolean"
                         }
                       },
                       "required": [
@@ -741,27 +758,25 @@
                   }
                 }
               },
-              "standard": {
+              "logo": {
                 "default": null,
                 "anyOf": [
                   {
                     "type": "object",
                     "properties": {
-                      "kind": {
+                      "imageId": {
                         "type": "string",
-                        "minLength": 1
+                        "pattern": "^[0-9a-f]{64}\\.(png|jpg|jpeg|svg|webp)$"
                       },
-                      "params": {
-                        "type": "object",
-                        "propertyNames": {
-                          "type": "string"
-                        },
-                        "additionalProperties": {}
+                      "aspect": {
+                        "type": "number",
+                        "minimum": 0.05,
+                        "maximum": 40
                       }
                     },
                     "required": [
-                      "kind",
-                      "params"
+                      "imageId",
+                      "aspect"
                     ]
                   },
                   {
@@ -796,7 +811,7 @@
                         "minimum": 1,
                         "maximum": 9007199254740991
                       },
-                      "modelId": {
+                      "machineId": {
                         "type": "string",
                         "format": "uuid",
                         "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
@@ -806,7 +821,7 @@
                       "libraryId",
                       "libraryName",
                       "libraryVersion",
-                      "modelId"
+                      "machineId"
                     ]
                   },
                   {
@@ -818,7 +833,7 @@
             "required": [
               "id",
               "name",
-              "category",
+              "equipment",
               "heightU"
             ]
           }
@@ -1000,7 +1015,7 @@
             "format": "uuid",
             "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
           },
-          "modelId": {
+          "machineId": {
             "type": "string",
             "format": "uuid",
             "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
@@ -1179,7 +1194,7 @@
         },
         "required": [
           "id",
-          "modelId",
+          "machineId",
           "name",
           "placement"
         ]
@@ -1744,16 +1759,22 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "x": {
+                      "viewId": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                      },
+                      "dx": {
                         "type": "number"
                       },
-                      "y": {
+                      "dy": {
                         "type": "number"
                       }
                     },
                     "required": [
-                      "x",
-                      "y"
+                      "viewId",
+                      "dx",
+                      "dy"
                     ]
                   }
                 }
@@ -1925,6 +1946,6 @@
     "meta",
     "library"
   ],
-  "$id": "rkdg-project-v1.schema.json",
-  "title": "Portolan project.json (format 1)"
+  "$id": "rkdg-project-v2.schema.json",
+  "title": "Portolan project.json (format 2)"
 }
