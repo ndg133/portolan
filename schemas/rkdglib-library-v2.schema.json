@@ -702,6 +702,32 @@
                   }
                 ]
               },
+              "carried": {
+                "default": null,
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "imageId": {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{64}\\.(png|jpg|jpeg|svg|webp)$"
+                      },
+                      "aspect": {
+                        "type": "number",
+                        "minimum": 0.05,
+                        "maximum": 40
+                      }
+                    },
+                    "required": [
+                      "imageId",
+                      "aspect"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
               "tags": {
                 "default": [],
                 "type": "array",
